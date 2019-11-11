@@ -28,7 +28,7 @@ public class DirectExchangeTest {
 		assertThat(READ_MESSAGE).isEqualTo(receivedReadMessage);
 
 		String receivedUpdateMessage = (String) this.rabbitTemplate.receiveAndConvert("customerUpdateQueue");
-		assertThat(UPDATE_MESSAGE).isEqualTo(receivedUpdateMessage);
+		assertThat(receivedUpdateMessage).isEqualTo(UPDATE_MESSAGE);
 	}
 
 }
