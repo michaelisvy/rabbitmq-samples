@@ -1,19 +1,16 @@
 package com.samples;
 
 import com.samples.model.Customer;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 import static org.assertj.core.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class JsonRabbitMqTest {
 
