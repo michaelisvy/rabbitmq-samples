@@ -25,8 +25,11 @@ public class TopicExchangeTest {
 		String receivedMessage1 = (String) this.rabbitTemplate.receiveAndConvert("animalFoxQueue");
 		assertThat(receivedMessage1).isNull();
 
-		String receivedMessage3 = (String) this.rabbitTemplate.receiveAndConvert("animalAllQueue");
-		assertThat(receivedMessage3).isEqualTo(MESSAGE);
+		String receivedMessage3 = (String) this.rabbitTemplate.receiveAndConvert("animalAllStarQueue");
+		assertThat(receivedMessage3).isNull(); // because 2 dots
+
+		String receivedMessage4 = (String) this.rabbitTemplate.receiveAndConvert("animalAllDashQueue");
+		assertThat(receivedMessage4).isEqualTo(MESSAGE);
 	}
 
 	@Test
@@ -40,8 +43,11 @@ public class TopicExchangeTest {
 		String receivedMessage1 = (String) this.rabbitTemplate.receiveAndConvert("animalBirdQueue");
 		assertThat(receivedMessage1).isNull();
 
-		String receivedMessage3 = (String) this.rabbitTemplate.receiveAndConvert("animalAllQueue");
+		String receivedMessage3 = (String) this.rabbitTemplate.receiveAndConvert("animalAllStarQueue");
 		assertThat(receivedMessage3).isEqualTo(MESSAGE);
+
+		String receivedMessage4 = (String) this.rabbitTemplate.receiveAndConvert("animalAllDashQueue");
+		assertThat(receivedMessage4).isEqualTo(MESSAGE);
 	}
 
 	@Test
@@ -55,8 +61,11 @@ public class TopicExchangeTest {
 		String receivedMessage1 = (String) this.rabbitTemplate.receiveAndConvert("animalBirdQueue");
 		assertThat(receivedMessage1).isNull();
 
-		String receivedMessage3 = (String) this.rabbitTemplate.receiveAndConvert("animalAllQueue");
-		assertThat(receivedMessage3).isEqualTo(MESSAGE);
+		String receivedMessage3 = (String) this.rabbitTemplate.receiveAndConvert("animalAllStarQueue");
+		assertThat(receivedMessage3).isNull(); // `animal.*` does not catch `animal`
+
+		String receivedMessage4 = (String) this.rabbitTemplate.receiveAndConvert("animalAllDashQueue");
+		assertThat(receivedMessage4).isEqualTo(MESSAGE); // `animal.#` catches `animal`
 	}
 
 }

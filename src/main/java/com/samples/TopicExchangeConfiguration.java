@@ -19,8 +19,13 @@ public class TopicExchangeConfiguration {
 	}
 
 	@Bean
-	Queue animalAllQueue() {
-		return new Queue("animalAllQueue");
+	Queue animalAllStarQueue() {
+		return new Queue("animalAllStarQueue");
+	}
+
+	@Bean
+	Queue animalAllDashQueue() {
+		return new Queue("animalAllDashQueue");
 	}
 
 	@Bean
@@ -29,7 +34,7 @@ public class TopicExchangeConfiguration {
 	}
 
 	@Bean
-	Binding bindingTopicQueue1AAA(Queue animalFoxQueue, TopicExchange animalExchange) {
+	Binding bindingTopicQueue1(Queue animalFoxQueue, TopicExchange animalExchange) {
 		return BindingBuilder.bind(animalFoxQueue).to(animalExchange).with("animal.fox.*");
 	}
 
@@ -39,8 +44,13 @@ public class TopicExchangeConfiguration {
 	}
 
 	@Bean
-	Binding bindingTopicQueue3(Queue animalAllQueue, TopicExchange animalExchange) {
-		return BindingBuilder.bind(animalAllQueue).to(animalExchange).with("animal.#");
+	Binding bindingTopicQueue3(Queue animalAllStarQueue, TopicExchange animalExchange) {
+		return BindingBuilder.bind(animalAllStarQueue).to(animalExchange).with("animal.*");
+	}
+
+	@Bean
+	Binding bindingTopicQueue4(Queue animalAllDashQueue, TopicExchange animalExchange) {
+		return BindingBuilder.bind(animalAllDashQueue).to(animalExchange).with("animal.#");
 		/*  `#` is stronger than `*`
 			`animal.dog` => ok with `animal.#` and ok with `animal.*`
 			`animal.dog.husky` => ok with `animal.#` and NOT OK with `animal.*`
