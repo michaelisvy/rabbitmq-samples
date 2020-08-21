@@ -19,7 +19,7 @@ public class Event {
     LocalDateTime dateTime;
     private boolean hasBeenProcessed;
 
-    public Event() {
+    private Event() {
     }
 
     public Event(LocalDateTime dateTime, boolean hasBeenProcessed) {
@@ -27,7 +27,7 @@ public class Event {
         this.hasBeenProcessed = hasBeenProcessed;
     }
 
-    public String getTime() {
+    public String extractTime() {
         return dateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
     }
 }

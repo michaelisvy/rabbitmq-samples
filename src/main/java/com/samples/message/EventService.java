@@ -27,6 +27,6 @@ public class EventService {
     public void persistEvent() {
         Event event = new Event(LocalDateTime.now(), false);
         this.eventRepository.save(event);
-        log.info("created event in DB: {}" + event.getTime());
+        log.info("created event {}, in DB: {}", event.getId(), event.extractTime());
     }
 }

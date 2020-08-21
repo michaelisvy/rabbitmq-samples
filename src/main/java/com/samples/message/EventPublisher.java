@@ -22,7 +22,7 @@ public class EventPublisher {
         List<Event> events = this.eventRepository.findUnprocessedEvents();
 
         for(Event event: events) {
-            log.info("posting event {}", event.getTime());
+            log.info("posting event {}, time: {}", event.getId(), event.extractTime());
             this.rabbitTemplate.convertAndSend("eventExchange", "event.#", event);
             event.setHasBeenProcessed(true);
             this.eventRepository.save(event);
